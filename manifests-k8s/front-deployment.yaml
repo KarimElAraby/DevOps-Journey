@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-front
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front-static
+  template:
+    metadata:
+      labels:
+        app: front-static
+    spec:
+      containers:
+        - name: front-static
+          image: karimaraby/devops-journey:front-1.0
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-end
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: front-static

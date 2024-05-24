@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-frontapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front-api
+  template:
+    metadata:
+      labels:
+        app: front-api
+    spec:
+      containers:
+        - name: front-api
+          image: karimaraby/devops-journey:frontapi-4.0
+          ports:
+            - containerPort: 5001
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-api-svc
+spec:
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
+  selector:
+    app: front-api
