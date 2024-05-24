@@ -1,14 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
+
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh 'mvn -B clean package'
+                sh "echo 'Building....'"
+                sh "docker --version"
+
             }
         }
     }
