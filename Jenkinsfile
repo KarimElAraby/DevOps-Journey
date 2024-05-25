@@ -1,14 +1,13 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:19.03.12'
-            args '--privileged' // Required to run Docker within Docker
-        }
-    }
+    agent any
     stages {
         stage('Docker Version') {
             steps {
-                sh 'docker version'
+                script {
+                    docker.image('docker:19.03.12').inside('--privileged') {
+                        sh 'docker version'
+                    }
+                }
             }
         }
     }
