@@ -5,8 +5,8 @@ pipeline {
         stage('build') {
             steps {
                 sh "echo 'Building....'"
-                sh "kubectl kubectl version"
                 sh "docker version"
+                sh "kubectl kubectl version"
 
             }
         }
