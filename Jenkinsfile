@@ -4,9 +4,9 @@ pipeline {
         stage('Docker Version') {
             steps {
                 script {
-                    docker.image('docker:19.03.12').inside('--privileged') {
-                        sh 'docker version'
-                    }
+                    def dockerImage = 'docker:19.03.12'
+                    sh "docker pull ${dockerImage}"
+                    sh "docker run --privileged --rm ${dockerImage} docker version"
                 }
             }
         }
