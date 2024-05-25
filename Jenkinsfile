@@ -1,12 +1,13 @@
 pipeline {
-    agent any
+    agent {
 
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh "echo 'Building....'"
-                sh "docker --version"
-
+                container('docker') {
+                    sh 'docker version'
+                    }
+                }
             }
         }
     }
