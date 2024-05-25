@@ -19,7 +19,7 @@ spec:
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
-          image: jenkins/jenkins:lts
+          image: karimaraby/devops-journey:jenkins-1.0
           resources:
             limits:
               memory: "2Gi"
@@ -53,8 +53,6 @@ spec:
               mountPath: /var/jenkins_home
             - name: docker-sock
               mountPath: /var/run/docker.sock
-            - name: docker-user
-              mountPath: /usr/bin/docker
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
@@ -62,6 +60,3 @@ spec:
         - name: docker-sock
           hostPath:
               path: /var/run/docker.sock
-        - name: docker-user
-          hostPath:
-              path: /usr/bin/docker
