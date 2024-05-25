@@ -13,13 +13,12 @@ spec:
       labels:
         app: jenkins-server
     spec:
-      securityContext:
-            fsGroup: 1000
-            runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
-          image: karimaraby/devops-journey:jenkins-1.0
+          image: karimaraby/devops-journey:jenkins-4.0
+          securityContext:
+            privileged: true
           resources:
             limits:
               memory: "2Gi"
