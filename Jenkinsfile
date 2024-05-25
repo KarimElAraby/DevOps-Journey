@@ -1,13 +1,14 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'docker:19.03.12'
+            args '--privileged' // Required to run Docker within Docker
+        }
+    }
     stages {
-        stage('build') {
+        stage('Docker Version') {
             steps {
-                sh "echo 'Building....'"
-                sh "docker version"
-                sh "kubectl kubectl version"
-
+                sh 'docker version'
             }
         }
     }
