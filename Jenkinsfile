@@ -4,10 +4,13 @@ pipeline {
             yaml """
             apiVersion: v1
             kind: Pod
+            metadata:
+              labels:
+                jenkins: agent
             spec:
               containers:
               - name: jnlp
-                image: jenkins/inbound-agent
+                image: jenkins/inbound-agent:latest
                 args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
               - name: docker
                 image: docker:19.03.12
