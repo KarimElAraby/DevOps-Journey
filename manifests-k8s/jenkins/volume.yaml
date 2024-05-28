@@ -29,7 +29,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - devops-journey-0-worker
+          - devops-journey-0-worker  # name of nodes
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
