@@ -42,3 +42,6 @@ pipeline {
         }
     }
 }
+
+
+sh "kubectl set image deployment/deployment-front -n=default front-static=karimaraby/devops-journey:frontapi-4.${env.BUILD_NUMBER}"
