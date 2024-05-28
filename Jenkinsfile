@@ -7,6 +7,8 @@ pipeline {
                 sh "echo 'Building....'"
                 sh "docker ps"
                 sh "kubectl get pod -n default"
+                sh "kubectl get pod "
+
 
             }
         }
