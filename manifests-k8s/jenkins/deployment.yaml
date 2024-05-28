@@ -13,12 +13,13 @@ spec:
       labels:
         app: jenkins-server
     spec:
+      securityContext:
+            fsGroup: 1000
+            runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
-          image: karimaraby/devops-journey:jenkins-4.0
-          securityContext:
-            privileged: true
+          image: karimaraby/devops-journey:jenkins-6.0
           resources:
             limits:
               memory: "2Gi"
@@ -52,10 +53,15 @@ spec:
               mountPath: /var/jenkins_home
             - name: docker-sock
               mountPath: /var/run/docker.sock
+            - name: docker-user 
+              mountPath: /usr/bin/docker
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
-              claimName: jenkins-pv-claim
+            claimName: jenkins-pv-claim
         - name: docker-sock
           hostPath:
-              path: /var/run/docker.sock
+            path: /var/run/docker.sock
+        - name: docker-user
+          hostPath:
+            path: /usr/bin/docker

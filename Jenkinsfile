@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh "echo 'Building....'"
                 sh "docker version"
-                sh "kubectl kubectl version"
+                sh "kubectl version"
 
             }
         }
