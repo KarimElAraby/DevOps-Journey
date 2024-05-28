@@ -76,4 +76,3 @@ sudo docker [commands] run
 ```
  mysql –h <ip address> -u <user name> -p <password(if any)> 
 ```
- 
