@@ -1,4 +1,4 @@
-# 3-Tier Application Deployment with ArgoCD, Jenkins, Prometheus, and Grafana
+# DevOps Journey
 
 ## Overview
 
@@ -24,7 +24,7 @@ This project demonstrates the deployment of a 3-tier application (frontend, back
 1. **Create a KinD cluster:**
 
     ```sh
-    kind create cluster --name my-cluster
+    kind create cluster --config manifests-k8s/cluster_config --name my-cluster
     ```
 
 2. **Install Nginx Ingress Controller:**
@@ -70,7 +70,7 @@ This project demonstrates the deployment of a 3-tier application (frontend, back
     Access Grafana UI by port forwarding:
 
     ```sh
-    kubectl port-forward svc/grafana 3000:80
+    kubectl port-forward svc/grafana 3000
     ```
 
     Default credentials for Grafana are `admin/admin`.
@@ -82,25 +82,30 @@ This project demonstrates the deployment of a 3-tier application (frontend, back
 1. **Deploy Jenkins:**
 
     ```sh
-    kubectl apply -f jenkins-deployment.yaml
+    kubectl apply -f manifests-k8s/jenkins/deployment.yaml
     ```
 
-2. **Access Jenkins:**
+2. **Expose Jenkins using NodePort:**
+
+    Apply the service configuration:
 
     ```sh
-    kubectl port-forward svc/jenkins 8080:8080
+    kubectl apply -f manifests-k8s/jenkins/service.yaml
     ```
 
-    Access Jenkins UI at `http://localhost:8080`.
+3. **Access Jenkins:**
 
-3. **Configure Jenkins:**
+    Find the IP of your `kind` node:
+
+    Access Jenkins at `http://<node-ip>:32000`.
+
+4. **Configure Jenkins:**
 
     - Install necessary plugins (e.g., Kubernetes, Git, ArgoCD).
     - Create a pipeline job with the following stages:
       - Build
       - Test
-      - Deploy (trigger ArgoCD sync)
-
+      - Deploy
 
 
 Kubernetes Manifests and Application Architecture
@@ -133,7 +138,6 @@ Port forward the Grafana service to access the UI:
 
 sh
 
-kubectl port-forward svc/grafana 3000:80
+kubectl port-forward svc/grafana 3000
 
-Default credentials are admin/admin.
 
