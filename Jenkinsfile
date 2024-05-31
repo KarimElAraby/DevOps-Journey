@@ -5,9 +5,8 @@ pipeline {
         stage('build') {
             steps {
                 sh "echo 'Building....'"
-                sh "docker build -t karimaraby/devops-journey:backflask-5.${env.BUILD_NUMBER} backend-flask/"
-                sh "docker build -t karimaraby/devops-journey:frontapi-4.${env.BUILD_NUMBER} frontend-html/"
-                sh "docker build -t karimaraby/devops-journey:front-1.${env.BUILD_NUMBER} frontend-html/templates/"
+                sh "docker build -t karimaraby/devops:back-7.${env.BUILD_NUMBER} backend-flask/"
+                sh "docker build -t karimaraby/devops:front-6.${env.BUILD_NUMBER} frontend-html/"
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'docker-cred', 
@@ -15,9 +14,8 @@ pipeline {
                         passwordVariable: 'PASS'
                         )]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh "docker push karimaraby/devops-journey:backflask-5.${env.BUILD_NUMBER}"
-                    sh "docker push karimaraby/devops-journey:frontapi-4.${env.BUILD_NUMBER}"
-                    sh "docker push karimaraby/devops-journey:front-1.${env.BUILD_NUMBER}"
+                    sh "docker push karimaraby/devops:back-7.${env.BUILD_NUMBER}"
+                    sh "docker push karimaraby/devops:front-6.${env.BUILD_NUMBER}"
                 }
             }
         }
@@ -30,9 +28,8 @@ pipeline {
     stage('deploy') {
             steps {
                 sh "echo 'Deploying....'"
-                sh "kubectl set image deployment/backend -n=default backend=karimaraby/devops-journey:backflask-5.${env.BUILD_NUMBER}"
-                sh "kubectl set image deployment/deployment-frontapi -n=default front-api=karimaraby/devops-journey:frontapi-4.${env.BUILD_NUMBER}"
-                sh "kubectl set image deployment/deployment-front -n=default front-static=karimaraby/devops-journey:front-1.${env.BUILD_NUMBER}"
+                sh "kubectl set image deployment/backend -n=default backend=karimaraby/devops:back-7.${env.BUILD_NUMBER}"
+                sh "kubectl set image deployment/frontend -n=default frontend=karimaraby/devops:front-6.${env.BUILD_NUMBER}"
             }
         }
     }
