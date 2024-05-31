@@ -108,7 +108,7 @@ This project demonstrates the deployment of a 3-tier application (frontend, back
       - Deploy
 
 
-Kubernetes Manifests and Application Architecture
+## Kubernetes Manifests and Application Architecture
 Application Architecture
 
 The application consists of three tiers:
