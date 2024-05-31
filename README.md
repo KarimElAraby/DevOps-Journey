@@ -1,79 +1,161 @@
-# 3-tier-Architecture-using-Docker
+# DevOps Journey
+
+## Overview
+
+This project demonstrates the deployment of a 3-tier application (frontend, backend, and SQL database) on a Kubernetes cluster using `kind` (Kubernetes IN Docker). The application is exposed externally via an Nginx ingress controller and features a robust CI/CD pipeline configured with Jenkins and ArgoCD. Additionally, the setup includes monitoring using Prometheus and Grafana.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Setup Instructions for KinD Cluster](#setup-instructions-for-kind-cluster)
+- [CI/CD Pipeline Configuration](#cicd-pipeline-configuration)
+- [Kubernetes Manifests and Application Architecture](#kubernetes-manifests-and-application-architecture)
+- [Monitoring with Prometheus and Grafana](#monitoring-with-prometheus-and-grafana)
+- [GitOps - CD with ArgoCD](#gitops---cd-with-argocd)
+
+## Setup Instructions for KinD Cluster
+
+### Prerequisites
+
+- Docker installed on your machine
+- `kubectl` command-line tool installed
+- `kind` tool installed
+
+### Setting Up the KinD Cluster
+
+1. **Create a KinD cluster:**
+
+    ```sh
+    kind create cluster --config manifests-k8s/cluster_config --name my-cluster
+    ```
+
+    ![KinD Cluster Creation](path/to/screenshot.png)
+
+2. **Install Nginx Ingress Controller:**
+
+    ```sh
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+    ```
+
+3. **Verify the Nginx Ingress Controller:**
+
+    ```sh
+    kubectl get pods -n ingress-nginx
+    ```
+
+    ![Nginx Ingress Controller Pods](path/to/screenshot.png)
+
+4. **Install ArgoCD:**
+
+    ```sh
+    kubectl create namespace argocd
+    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    ```
+
+5. **Access ArgoCD UI:**
+
+    Forward the ArgoCD server port to localhost:
+
+    ```sh
+    kubectl port-forward svc/argocd-server -n argocd 8080:443
+    ```
+
+    Access the ArgoCD UI at `https://localhost:8080`.
+
+    ![ArgoCD UI](path/to/screenshot.png)
+
+6. **Install Prometheus and Grafana:**
+
+    Use Helm to install Prometheus and Grafana:
+
+    ```sh
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo update
+    helm install prometheus prometheus-community/prometheus
+    helm install grafana grafana/grafana
+    ```
+
+    Access Grafana UI by port forwarding:
+
+    ```sh
+    kubectl port-forward svc/grafana 3000
+    ```
+
+    Default credentials for Grafana are `admin/admin`.
+
+    ![Grafana UI](path/to/screenshot.png)
+
+## CI/CD Pipeline Configuration
+
+### Jenkins Setup
+
+1. **Deploy Jenkins:**
+
+    ```sh
+    kubectl apply -f manifests-k8s/jenkins/deployment.yaml
+    ```
+
+2. **Expose Jenkins using NodePort:**
+
+    Apply the service configuration:
+
+    ```sh
+    kubectl apply -f manifests-k8s/jenkins/service.yaml
+    ```
+
+3. **Access Jenkins:**
+
+    Find the IP of your `kind` node and access Jenkins at `http://<node-ip>:32000`.
+
+    ![Jenkins UI](path/to/screenshot.png)
+
+4. **Configure Jenkins:**
+
+    - Install necessary plugins (e.g., Kubernetes, Git, ArgoCD).
+    - Create a pipeline job with the following stages:
+      - Build
+      - Test
+      - Deploy
+
+    ![Jenkins Pipeline](path/to/screenshot.png)
+
+## Kubernetes Manifests and Application Architecture
+
+### Application Architecture
+
+The application consists of three tiers:
+
+1. **Frontend:**
+   - Exposed via Nginx ingress
+   - Communicates with the backend
+
+2. **Backend:**
+   - Handles business logic
+   - Communicates with the SQL database
+
+3. **SQL Database:**
+   - Stores application data
+
+## Monitoring with Prometheus and Grafana
+
+### Prometheus
+
+Prometheus is configured to scrape metrics from your application and Kubernetes components. You can customize your `prometheus.yaml` configuration to include specific metrics.
+
+### Grafana
+
+Grafana is used to visualize the metrics collected by Prometheus. Pre-configured dashboards can be imported to monitor application health, performance, and resource usage.
+
+### Access Grafana
+
+Port forward the Grafana service to access the UI:
+
+```sh
+kubectl port-forward svc/grafana 3000:80
+```
+Default credentials are admin/admin.
 
 
-One common architecture for information systems that includes a user interface and persistent storage of data is known as the three-tier architecture. A classic description of the vertical tiers is:  
-Presentation - windows, reports, and so on.  
-Application Logic - tasks and rules which govern the process.  
-Storage - persistent storage mechanism.  
-The singular quality of a three-tier architecture is the separation of the application logic into a distinct logical middle tier of software. The presentation tier is relatively free of application processing; windows forward task requests to the middle tier. The middle tier communicates with the back-end storage layer.  
-Commands used 
-# To build any image
-``` 
-sudo docker build –t <image name> <path> 
-```
-&nbsp;&nbsp;&nbsp;&nbsp; Used to build an image
-&nbsp;&nbsp;&nbsp;&nbsp;sudo docker build –t frontend .  
+### GitOps - CD with ArgoCD
 
-# To run any image
-``` 
-sudo docker [commands] run 
-```
-&nbsp;&nbsp;&nbsp;&nbsp; -p <port to run on localhost> : <post on which it is exposed> :- port mapping    
-&nbsp;&nbsp;&nbsp;&nbsp;--name <name>:- Name of the Container    
-&nbsp;&nbsp;&nbsp;&nbsp;--network <network name> :- name of network  
-&nbsp;&nbsp;&nbsp;&nbsp;-it :- interactive mode  
-&nbsp;&nbsp;&nbsp;&nbsp;-d :- deattached mode  
- 
-# To delete the image
-```
- sudo docker rmi <image name> 
-```
-&nbsp;&nbsp;&nbsp;&nbsp; -f :- forcefully delete the image 
-
-
-# To Build, (re)create, start, and attache to containers for a service.
-```
- sudo docker-compose up   
-```
-
-# To Stop containers and removes containers, networks, volumes, and images created by up
-```
- sudo docker-compose down
-```
-
-# To delete the container
-``` 
- sudo docker rm <container name>   
-```
-&nbsp;&nbsp;&nbsp;&nbsp; -f :- forcefully delete the container  
-
-# Restart docker 
-```
- sudo systemctl restart docker 
-```
- &nbsp;&nbsp;&nbsp;&nbsp;Used to restart the docker
- 
-# IP address of container
-```
- sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} <container name/id> 
-```
-&nbsp;&nbsp;&nbsp;&nbsp;to know the ip address of container  
-
-# Create Network
-```
- sudo docker network create [options] network  
-```
-```
- docker network create -d bridge my-bridge-network  
-```
-``` 
- sudo docker network connect <network name> <container name> 
-```
-```
- sudo docker network inspect <network name>
-```
-# get MySQL database server
-```
- mysql –h <ip address> -u <user name> -p <password(if any)> 
-```
-
+Access the ArgoCD UI at https://localhost:8080.
