@@ -25,13 +25,13 @@ spec:
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-root-password
+                  name: back-secret
+                  key: mysql-root-password-back
             - name: MYSQL_DB
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-database
+                  name: back-secret
+                  key: mysql-database-back
 ---
 apiVersion: v1
 kind: Service
