@@ -30,8 +30,8 @@ pipeline {
     stage('deploy') {
             steps {
                 sh "echo 'Deploying....'"
-                sh "kubectl set image deployment/deployment-front -n=default front-static=karimaraby/devops-journey:backflask-5.${env.BUILD_NUMBER}"
-                sh "kubectl set image deployment/deployment-front -n=default front-static=karimaraby/devops-journey:frontapi-4.${env.BUILD_NUMBER}"
+                sh "kubectl set image deployment/backend -n=default backend=karimaraby/devops-journey:backflask-5.${env.BUILD_NUMBER}"
+                sh "kubectl set image deployment/deployment-frontapi -n=default front-api=karimaraby/devops-journey:frontapi-4.${env.BUILD_NUMBER}"
                 sh "kubectl set image deployment/deployment-front -n=default front-static=karimaraby/devops-journey:front-1.${env.BUILD_NUMBER}"
             }
         }

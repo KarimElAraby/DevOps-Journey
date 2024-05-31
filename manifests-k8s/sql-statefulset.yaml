@@ -3,11 +3,11 @@ kind: StatefulSet
 metadata:
   name: mysql
 spec:
-  replicas: 2
-  serviceName: mysql
   selector:
     matchLabels:
       app: mysql
+  serviceName: "mysql"
+  replicas: 2
   template:
     metadata:
       labels:
@@ -17,19 +17,18 @@ spec:
         - name: mysql
           image: mysql:8.0.17
           ports:
-            - name: mysql
-              containerPort: 3306
+            - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom: 
-               secretKeyRef: 
-                key: password
-                name: mysecret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-password
             - name: MYSQL_DATABASE
-              valueFrom: 
-               secretKeyRef: 
-                key: username
-                name: mysecret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-database
           volumeMounts:
           - name: mysql-persistent-storage
             mountPath: /var/lib/mysql
@@ -38,16 +37,3 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-pv-claim
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-spec:
-  selector:
-    app: mysql
-  ports:
-    - protocol: TCP
-      port: 3308
-      targetPort: 3306
