@@ -140,6 +140,8 @@ The application consists of three tiers:
 3. **SQL Database:**
    - Stores application data
 
+   ![Screenshot from 2024-06-01 18-02-12](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/5e825e40-ad34-4f96-8177-b343806cf7cd)
+
 ## Monitoring with Prometheus and Grafana
 
 ### Prometheus
