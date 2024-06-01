@@ -29,8 +29,8 @@ pipeline {
         stage('deploy') {
             steps {
                 sh "echo 'Deploying....'"
-                sh "sed -i 's|image: .*$|image: karimaraby/devops:back-7.${env.BUILD_NUMBER}|' manifests/back-deploy.yaml"
-                sh "sed -i 's|image: .*$|image: karimaraby/devops:front-6.${env.BUILD_NUMBER}|' manifests/fron-deploy.yaml"
+                sh "sed -i 's|image: .*\$|image: karimaraby/devops:back-7.${env.BUILD_NUMBER}|' manifests/back-deploy.yaml"
+                sh "sed -i 's|image: .*\$|image: karimaraby/devops:front-6.${env.BUILD_NUMBER}|' manifests/fron-deploy.yaml"
             }
         }
         stage('push') {
