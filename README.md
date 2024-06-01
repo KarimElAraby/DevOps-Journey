@@ -121,10 +121,17 @@ This project demonstrates the deployment of a 3-tier application (frontend, back
       - Test
       - Deploy
 ![Screenshot from 2024-05-29 02-59-13](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/e17dd448-fb1b-49a1-9c3c-535b3ca69bf0)
+
 ![Screenshot from 2024-05-31 21-22-07](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/5fc091dd-bf1f-45ef-81bd-05714cb6c66b)
-![Screenshot from 2024-05-31 19-38-43](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/c5f6bce5-4787-4e75-b53d-61390ec34e43)
-![Screenshot from 2024-05-31 19-39-05](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/8ac6a14c-f82d-40b7-a109-dea78dbbb016)
-![Screenshot from 2024-05-31 19-39-10](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/15970125-0089-42e3-b789-9ba04736f63e)
+
+![Screenshot from 2024-06-02 01-35-24](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/cfc0cabb-af8f-49bb-a285-8eecde4e3585)
+
+![Screenshot from 2024-06-02 01-35-35](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/c807c986-2eb9-4d2c-b138-2d7fafb9e689)
+
+![Screenshot from 2024-06-02 01-35-43](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/4eecbe4c-08b1-461b-873e-a3d46032607a)
+
+![Screenshot from 2024-06-02 01-35-47](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/4e51473d-c8f6-4ffa-8da5-e9db1de8668b)
+
 
 ## Kubernetes Manifests and Application Architecture
 
@@ -167,7 +174,16 @@ Grafana is used to visualize the metrics collected by Prometheus. Pre-configured
     ```
 
 Access the ArgoCD UI at https://localhost:8080.
+![Screenshot from 2024-06-02 01-26-17](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/b3ac0180-3f64-42c2-9a2f-97661fa42e33)
 
-![Screenshot from 2024-06-01 18-10-24](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/1a5ffaf6-886b-407d-beea-40431be868e4)
-![Screenshot from 2024-06-01 18-10-35](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/37feebed-c79e-4019-854e-7f6062f76b8a)
+![Screenshot from 2024-06-02 01-25-46](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/8f1ec23d-c1aa-4f20-96e5-85c6e9975cfe)
+
+![Screenshot from 2024-06-02 01-25-57](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/436d3a52-006a-4e92-8a90-a851b4c0893a)
+
+![Screenshot from 2024-06-02 01-26-07](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/ca9240cc-c62e-4a2b-afab-948aa35c4bcf)
+
+![Screenshot from 2024-06-02 01-35-47](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/560baa1d-a1f0-4051-bbc5-a35973d832c4)
+
+![Screenshot from 2024-06-02 01-28-03](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/b6aa2057-86f2-4c00-83f4-729996b6b15c)
+
 
