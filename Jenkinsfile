@@ -37,16 +37,16 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'git-cred', 
+                        credentialsId: 'git-token', 
                         usernameVariable: 'USER', 
-                        passwordVariable: 'PASS'
+                        passwordVariable: 'TOKEN'
                     )
                 ]) {
                     sh 'git config --global user.email "jenkins@example.com"'
                     sh 'git config --global user.name "jenkins"'
-                    sh "git remote set-url origin https://${USER}:${PASS}@github.com/KarimElAraby/DevOps-Journey.git"
                     sh 'git add .'
                     sh 'git commit -m "Jenkins pipeline"'
+                    sh "git remote set-url origin https://${USER}:${TOKEN}@github.com/KarimElAraby/DevOps-Journey.git"
                     sh 'git push origin HEAD:master'
                 }
             }
