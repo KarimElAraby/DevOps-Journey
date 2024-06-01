@@ -2,6 +2,7 @@
 
 ![WhatsApp Image 2024-06-01 at 1 25 16 AM](https://github.com/KarimElAraby/DevOps-Journey/assets/137705973/978a1c14-cfaa-49b4-97e9-22ae0385b754)
 
+
 ## Overview
 
 This project demonstrates the deployment of a 3-tier application (frontend, backend, and SQL database) on a Kubernetes cluster using `kind` (Kubernetes IN Docker). The application is exposed externally via an Nginx ingress controller and features a robust CI/CD pipeline configured with Jenkins and ArgoCD. Additionally, the setup includes monitoring using Prometheus and Grafana.
