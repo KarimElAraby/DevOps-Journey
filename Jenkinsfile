@@ -27,10 +27,27 @@ pipeline {
         } 
     stage('deploy') {
             steps {
-                sh "echo 'Deploying....'"
-                sh "kubectl set image deployment/backend -n=default backend=karimaraby/devops:back-7.${env.BUILD_NUMBER}"
-                sh "kubectl set image deployment/frontend -n=default frontend=karimaraby/devops:front-6.${env.BUILD_NUMBER}"
+              sh "echo 'Deploying....'"
+                sh "kubectl set image -f manifests/back-deploy.yaml backend=karimaraby/devops:back-7.${env.BUILD_NUMBER}"
+                sh "kubectl set image -f manifests/fron-deploy.yaml frontend=karimaraby/devops:front-6.${env.BUILD_NUMBER}"
             }
         }
-    }
-}
+        stage('push') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'git-cred', 
+                        usernameVariable: 'USER', 
+                        passwordVariable: 'PASS'
+                        )]) {
+                            sh 'git config --global user.email "jenkins@example.com"'
+                            sh 'git config --global user.name "jenkins"'
+                            sh "cd argocd && git remote set-url origin hhtps://${USER}:${PASS}@githubnew#"
+                            sh "cd argocd && git add ."
+                            sh 'cd argocd && git commit -m "Jenkins pipeline"'
+                            sh 'cd argocd && git push origin HEAD:master'
+                        }
+                    }
+               }
+            }
+        }
