@@ -42,10 +42,10 @@ pipeline {
                         )]) {
                             sh 'git config --global user.email "jenkins@example.com"'
                             sh 'git config --global user.name "jenkins"'
-                            sh "cd argocd && git remote set-url origin hhtps://${USER}:${PASS}@githubnew#"
-                            sh "cd argocd && git add ."
-                            sh 'cd argocd && git commit -m "Jenkins pipeline"'
-                            sh 'cd argocd && git push origin HEAD:master'
+                            sh "git remote set-url origin hhtps://${USER}:${PASS}@githubnew#"
+                            sh "git add ."
+                            sh 'git commit -m "Jenkins pipeline"'
+                            sh 'git push origin HEAD:master'
                         }
                     }
                }

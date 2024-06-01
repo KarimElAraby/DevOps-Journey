@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/KarimElAraby/DevOps-Journey.git'
     targetRevision: HEAD
-    path: manifests/
+    path: manifests
 
   destination:
     server: 'https://kubernetes.default.svc'
