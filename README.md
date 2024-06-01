@@ -161,8 +161,7 @@ Grafana is used to visualize the metrics collected by Prometheus. Pre-configured
 
     ```sh
     kubectl apply -f manifests/application.yaml
-        ```
-
+    ```
 
 Access the ArgoCD UI at https://localhost:8080.
 
