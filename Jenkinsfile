@@ -28,8 +28,8 @@ pipeline {
     stage('deploy') {
             steps {
               sh "echo 'Deploying....'"
-                sh "kubectl set image -f manifests/back-deploy.yaml backend=karimaraby/devops:back-7.${env.BUILD_NUMBER}"
-                sh "kubectl set image -f manifests/fron-deploy.yaml frontend=karimaraby/devops:front-6.${env.BUILD_NUMBER}"
+                sh "sed -i 's|image: .*$|image: karimaraby/devops:back-7.${env.BUILD_NUMBER}|' manifests/back-deploy.yaml"
+                sh "sed -i 's|image: .*$|image: karimaraby/devops:front-6.${env.BUILD_NUMBER}|' manifests/fron-deploy.yaml"
             }
         }
         stage('push') {
