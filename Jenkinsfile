@@ -27,9 +27,9 @@ pipeline {
         } 
     stage('deploy') {
             steps {
-              sh "echo 'Deploying....'"
-                sh "sed -i 's|image: .*$|image: karimaraby/devops:back-7.${env.BUILD_NUMBER}|' manifests/back-deploy.yaml"
-                sh "sed -i 's|image: .*$|image: karimaraby/devops:front-6.${env.BUILD_NUMBER}|' manifests/fron-deploy.yaml"
+              sh 'echo 'Deploying....''
+                sh 'sed -i 's|image: .*$|image: karimaraby/devops:back-7.${env.BUILD_NUMBER}|' manifests/back-deploy.yaml'
+                sh 'sed -i 's|image: .*$|image: karimaraby/devops:front-6.${env.BUILD_NUMBER}|' manifests/fron-deploy.yaml'
             }
         }
         stage('push') {
@@ -42,8 +42,8 @@ pipeline {
                         )]) {
                             sh 'git config --global user.email "jenkins@example.com"'
                             sh 'git config --global user.name "jenkins"'
-                            sh "git remote set-url origin hhtps://${USER}:${PASS}@githubnew#"
-                            sh "git add ."
+                            sh "git remote set-url origin hhtps://${USER}:${PASS}@github.com/KarimElAraby/DevOps-Journey.git"
+                            sh 'git add .'
                             sh 'git commit -m "Jenkins pipeline"'
                             sh 'git push origin HEAD:master'
                         }
