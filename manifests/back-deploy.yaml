@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: karimaraby/devops:back-7.21
+          image: karimaraby/devops:back-7.23
           ports:
             - containerPort: 5000
           env:

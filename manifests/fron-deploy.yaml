@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: karimaraby/devops:front-6.21
+          image: karimaraby/devops:front-6.23
           ports:
             - containerPort: 5001
           env:
