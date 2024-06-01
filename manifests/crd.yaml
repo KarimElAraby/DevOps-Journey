@@ -21,7 +21,6 @@ spec:
           spec:
             type: object
             properties:
-              # Add the properties of your `Cluster` resource here
               foo:
                 type: string
               bar:
